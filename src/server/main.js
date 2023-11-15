@@ -1,10 +1,3 @@
-const express = require("express");
-const ViteExpress = require("vite-express");
-const path = require('path');
-
-const app = express();
-const port = 3000;
-
 // Was wir machen wollen:
 // Homepage mit bewegenden Augen vom Maskottchen und Menu zu anderen Seiten
 // Seite mit meinen Lieblingssprüchen, die man ergänzen kann (zurücksezten kann) mit POST
@@ -17,30 +10,48 @@ const port = 3000;
 // devtools auf anderen Seiten nutzen, um Passwort zu sehen...
 // Ausblick: wie würde man die Website online stellen?
 
-// app.use(express.static(path.resolve(__dirname + "/../../public")));
-// app.use("/src/client", express.static(path.resolve(__dirname + "/../client")));
+const express = require("express");
+const path = require('path');
 
+// framework für server
+// https://expressjs.com/de/4x/api.html
+const app = express();
+// Der Port (Hafen) mapped Internetverbindungen zu einem bestimmten Programm auf einem Computer.
+const port = 3000;
+
+// unter diesem Pfad "/client" werden Dateien im Ordner src/client an den client gesendet...
+app.use("/client", express.static(path.resolve(__dirname + "/../client")));
+
+// GET ist im HTTP (Hypertext Transfer Protokoll) gestgelegt
+// Es gibt den Inhalt der dargestellt werden soll zurück
+// Hier wird nur Text dargestellt
+// req ... request (Anfrage vom Client)
+// res ... result (Antwort an den Client)
 app.get("/hello", (req, res) => {
-	res.send("Hello Vite!");
+	res.send("Hallo, ich bin dein Server °-°");
 });
 
-app.get("/geheim", (req, res) => {
-	res.sendFile(path.resolve(__dirname + "/../../index.html"));
+// Jetzt wollen wir HTML (Hypertext Markup Language) darstellen
+app.get("/", (req, res) => {
+	res.sendFile(path.resolve(__dirname + "/../client/home/index.html"));
 });
 
-// app.get("*", (req, res) => {
-// 	res.send("404");
-// });
-
+// POST ist eine weiter HTTP Methode. Der Client kann damit Daten an den Server senden.
 app.post("/contact", (req, res) => {
 	res.send("Hello do you wanna contact me?");
 });
 
-// const server = app.listen(port, () => {
-// 	console.log("listen on " + port);
-// });
+// Das Sternchen fängt alle anderen Pfade ab. Hier können wir eine "Nicht gefunden" Website
+// darstellen
+app.get("*", (req, res) => {
+	res.send("404: Du befindest dich auf " + req.url);
+});
 
-// Ships the index.html and stuff at "*"
-ViteExpress.listen(app, 3000, () =>
-	console.log("Server is listening on port 3000...")
-);
+// Hier wird der Server gestartet.
+// localhost ist ein Alias für die IP deines eigenen Computers
+// Die ist mit IPv4 immer 127.0.0.1
+// mit IPv6 immer ::1
+// Aber ist nicht wichtig... :D
+const server = app.listen(port, () => {
+	console.log("server started, visit under: http://localhost:" + port);
+});
