@@ -76,6 +76,24 @@ a:hover {
 	animation: vertical 6s linear infinite 0s;
 }
 
+.flight-animation {
+	animation: flight 6s linear infinite 0s;
+}
+
+@keyframes flight{
+	0%{
+		transform:rotate(0deg)
+		translate(165px)
+		rotate(0deg);
+
+	}
+	100%{
+		transform:rotate(360deg)
+		translate(165px)
+		rotate(-360deg);
+	}
+}
+
 @keyframes vertical{
 	0% { opacity: 0; }
 	33% { opacity: 1; transform: rotateX(180deg); }
