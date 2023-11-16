@@ -1,10 +1,10 @@
 // Was wir machen wollen:
 // Homepage mit bewegenden Augen vom Maskottchen und Menu zu anderen Seiten
 // Seite mit meinen Lieblingssprüchen, die man ergänzen kann (zurücksezten kann) mit POST
+// oder besser noch: neue seiten registrieren, pfad und text... )=> kann man exploiten:D
 // Spendenseite mit Paypal
 // Lieblingsvideo mit iframe
 // 404 seite
-// Donut drop spaß
 // Tailwind designing
 // devtools nutzen
 // devtools auf anderen Seiten nutzen, um Passwort zu sehen...

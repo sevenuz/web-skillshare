@@ -26,6 +26,7 @@ $("#bird").click(() => {
 	show = !show;
 });
 
+// https://codepen.io/whipcat/pen/ExKPQqZ?editors=1111
 $("body").mousemove((event) => {
 	var eye = $("#eye");
   var x = (eye.offset().left) + (eye.width() / 2);
