@@ -1,19 +1,14 @@
 async function load_subtitle() {
 	const response = await fetch("/contact", { method: "POST" });
 	console.log(response);
-	fetch('/contact', {
-		method: 'post',
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify({
-			text: 'this is a test'
-		})
-	})
+	fetch('/content', { method: 'post' })
 		.then(response => response.text())
 		.then(body => {
-			console.log(body);
-			$("#infotext").html(body);
+			let html = "";
+			for(let path of JSON.parse(body)) {
+				html += `<a class="m-2 hover:text-green-700" href="${path}">${path}</a><br>`;
+			}
+			$("#infotext").html(html);
 		});
 }
 
